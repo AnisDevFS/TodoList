@@ -3,6 +3,7 @@ package com.servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.entities.Dossier;
 import com.entities.Tache;
 import com.entities.User;
 
@@ -41,7 +42,17 @@ public class Todo extends HttpServlet {
 		Tache t2 = new Tache(2, "acheter du pain");
 		ArrayList<Tache> listeTaches = new ArrayList<Tache>();
 		listeTaches.add(t1) ; listeTaches.add(t2);
-		User user = new User(nom, "alex@pop.fr", 25, listeTaches);
+		
+		Tache t11 = new Tache(1, "Créer la DB");
+		Tache t22 = new Tache(2, "Faire la conception");
+		ArrayList<Tache> listeTaches2 = new ArrayList<Tache>();
+		listeTaches2.add(t11) ; listeTaches2.add(t22);
+		ArrayList<Dossier> dossiers = new ArrayList<Dossier>();
+		Dossier courses = new Dossier(1, "faireles courses", listeTaches);
+		Dossier projet = new Dossier(1, "Projet Spring", listeTaches2);
+		
+		dossiers.add(projet); dossiers.add(courses);
+		User user = new User(nom, "alex@pop.fr", 15, dossiers);
 
 		request.setAttribute("myUser", user);
 		request.getRequestDispatcher("/WEB-INF/todo.jsp").forward(request, response);

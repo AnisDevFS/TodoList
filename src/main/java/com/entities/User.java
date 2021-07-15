@@ -7,20 +7,21 @@ public class User {
 	private String nom;
 	private String email;
 	private int age;
-	private ArrayList<Tache> taches;
+	private ArrayList<Dossier> dossiers;
 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(String nom, String email, int age, ArrayList<Tache> taches) {
+	public User(String nom, String email, int age, ArrayList<Dossier> dossiers) {
 		super();
 		this.nom = nom;
 		this.email = email;
 		this.age = age;
-		this.taches = taches;
+		this.dossiers = dossiers;
 	}
+
 	public String getNom() {
 		return nom;
 	}
@@ -45,11 +46,12 @@ public class User {
 		this.age = age;
 	}
 
-	public ArrayList<Tache> getTaches() {
-		return taches;
+	public ArrayList<Dossier> getDossiers() {
+		return dossiers;
 	}
 
-	public void setTaches(ArrayList<Tache> taches) {
-		this.taches = taches;
+	public void setDossiers(ArrayList<Dossier> dossiers) {
+		this.dossiers = dossiers;
 	}
+
 }
