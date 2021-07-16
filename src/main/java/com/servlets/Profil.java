@@ -1,6 +1,7 @@
 package com.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -34,12 +35,29 @@ public class Profil extends HttpServlet {
 		String nom = request.getParameter("nom");
 		String age = request.getParameter("age");
 		String adresse = request.getParameter("adresse");
-		request.setAttribute("age", age);
-		request.setAttribute("email", email);
-		request.setAttribute("adresse", adresse);
-		request.setAttribute("nom", nom);
-		request.setAttribute("password", password);
-		request.getRequestDispatcher("/WEB-INF/profil/reussite.jsp").forward(request, response);
+
+		ArrayList<String> erreurs = new ArrayList<String>();
+		if (email.isEmpty()) erreurs.add("Email pas renseigné");
+		if (password.length() == 0) erreurs.add("Password pas renseigné");
+		if (nom.isEmpty()) erreurs.add("Nom pas renseigné");
+		if (adresse.equals("")) erreurs.add("Adresse pas renseignée");
+		if (age.isEmpty()) erreurs.add("Age pas renseigné");
+		else {
+			if (Integer.parseInt(age) < 0) erreurs.add("Age négatif");
+		}
+		
+		if (erreurs.size() > 0) {
+			request.setAttribute("erreurs", erreurs);
+			request.getRequestDispatcher("/WEB-INF/profil/erreur.jsp").forward(request, response);
+		}
+		else {
+			request.setAttribute("age", age);
+			request.setAttribute("email", email);
+			request.setAttribute("adresse", adresse);
+			request.setAttribute("nom", nom);
+			request.getRequestDispatcher("/WEB-INF/profil/reussite.jsp").forward(request, response);
+		}
+
 
 	}
 
